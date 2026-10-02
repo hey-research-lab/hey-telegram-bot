@@ -7,6 +7,7 @@ import {
   activityWords,
   researchLevelLabel,
 } from '../words.js';
+import { isSafeUrl } from '../text.js';
 import { bold, code, escapeHtml, external, joinWithinBudget, link, quoted } from './html.js';
 
 /**
@@ -49,7 +50,11 @@ const footer = (disclaimer: string | undefined): string[] =>
 /** A source's words in bold: folded, bounded and escaped first. */
 const boldExternal = (raw: string): string => `<b>${external(raw, 120)}</b>`;
 
-const pageLabel = (url: string): string => url.replace(/^https:\/\//, '');
+const pageLabel = (url: string): string => url.replace(/^https:\/\//, '').replace(/[?#].*$/, '');
+
+/** ` · source` linking a ship's public source, or nothing when the URL is not a plain https URL. */
+const sourceLink = (url: string | undefined): string =>
+  isSafeUrl(url) && url.toLowerCase().startsWith('https://') ? ` · ${link(url, 'source')}` : '';
 
 export function renderHelp(): string {
   return [
@@ -63,7 +68,7 @@ export function renderHelp(): string {
     '/hey — about HEY Research and this bot',
     '/help — this list',
     '',
-    `Example: ${code('/project hey-research')}`,
+    `Example: ${code('/project hey-research-lab')}`,
   ].join('\n');
 }
 
@@ -73,7 +78,7 @@ export function renderAbout(): string {
     'HEY finds which projects on Robinhood Chain are still building, what they have shipped, and the public evidence behind each record.',
     '',
     'This bot relays HEY’s public API and nothing else. It keeps no accounts, no watchlists and no message history.',
-    'Activity status is a record of development, not a view on a token. An unknown value means HEY does not know — not zero. Nothing the bot sends is financial advice or a safety verdict.',
+    'Activity status is a record of development, not a view on a token. An unknown value means HEY does not know — not zero. What the bot sends is not financial advice and not a safety verdict.',
     '',
     `${link(SITE, 'heyresearch.xyz')} · ${link(`${SITE}/docs/public-api`, 'Public API')} · ${link(REPO_URL, 'Source')}`,
     '',
@@ -97,7 +102,7 @@ export function renderProject(p: Project): string {
   );
   const newest = p.ships?.[0];
   if (newest) {
-    const source = newest.sourceUrl ? ` · ${link(newest.sourceUrl, 'source')}` : '';
+    const source = sourceLink(newest.sourceUrl);
     lines.push(
       `Newest ship: ${quoted(newest.title, 160)} · ${formatWhen(newest.publishedAt, newest.precision)}${
         newest.verification ? ` · ${code(newest.verification)}` : ''
@@ -165,7 +170,7 @@ export function renderScan(card: ScanCard, address: string): string {
   const a = card.activity;
   if (a?.last_ship) {
     const title = a.last_ship_title ? ` ${quoted(a.last_ship_title, 160)}` : '';
-    const source = a.last_ship_url ? ` · ${link(a.last_ship_url, 'source')}` : '';
+    const source = sourceLink(a.last_ship_url);
     lines.push(`Last ship: ${formatWhen(a.last_ship)}${title}${source}`);
   }
   const page = card.cta?.url ?? card.project_url;

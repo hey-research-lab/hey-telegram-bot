@@ -65,15 +65,18 @@ export function joinWithinBudget(
   budget = MESSAGE_BUDGET,
 ): string {
   const tail = footer.join('\n');
+  // Room for the footer, the newline before it and a "…" line.
+  const room = budget - (tail ? tail.length + 1 : 0) - 2;
   const out: string[] = [];
-  let used = tail.length + 1;
+  let used = 0;
   for (const line of lines) {
-    if (used + line.length + 1 > budget) {
+    const cost = (out.length > 0 ? 1 : 0) + line.length;
+    if (used + cost > room) {
       out.push('…');
       break;
     }
     out.push(line);
-    used += line.length + 1;
+    used += cost;
   }
   return [...out, ...(tail ? [tail] : [])].join('\n');
 }
