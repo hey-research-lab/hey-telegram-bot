@@ -4,6 +4,11 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project uses
 [Semantic Versioning](https://semver.org/).
 
+## 0.1.1 — 2026-10-02
+
+- `/changes`: a scheduled event (an unlock due later) is listed apart under **Scheduled**, as "due …", never among recent changes; recorded changes say they are newest recorded first.
+- Issue templates (bug, idea) with private security reporting and HEY corrections linked.
+
 ## 0.1.0 — 2026-10-02
 
 ### Added

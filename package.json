@@ -1,6 +1,6 @@
 {
   "name": "hey-telegram-bot",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "description": "Self-hostable, read-only Telegram bot for HEY Research Lab lookups on Robinhood Chain, powered only by the public API.",
   "license": "MIT",

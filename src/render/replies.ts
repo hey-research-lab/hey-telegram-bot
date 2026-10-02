@@ -198,7 +198,12 @@ function scanActivityLine(card: Extract<ScanCard, { found: true }>): string {
   return `Last 30 days — ${count(a?.ships_30d, 'ships')}, ${count(a?.releases_30d, 'releases')}, ${commits}`;
 }
 
-export function renderChanges(slug: string, page: ChangesPage, siteBase: string): string {
+export function renderChanges(
+  slug: string,
+  page: ChangesPage,
+  siteBase: string,
+  now: Date = new Date(),
+): string {
   const items = page.items.filter(
     (i): i is Extract<ChangesPage['items'][number], { op: 'upsert' }> =>
       i.op === 'upsert' && i.domain !== 'market' && !i.type.startsWith('market'),
@@ -215,13 +220,25 @@ export function renderChanges(slug: string, page: ChangesPage, siteBase: string)
       lines.push(`The ledger records changes from ${formatWhen(page.ledger.collectionStart)}.`);
     }
   } else {
-    for (const item of items) {
+    // A scheduled event (an unlock due later) is not a recent change: listed apart, as due (0.1.1).
+    const isScheduled = (item: (typeof items)[number]): boolean =>
+      item.precision === 'SCHEDULED' ||
+      (item.occurredAt !== null && Date.parse(item.occurredAt) > now.getTime());
+    const render = (item: (typeof items)[number], due: boolean): void => {
       const when = item.occurredAt
-        ? formatWhen(item.occurredAt, item.precision)
+        ? `${due ? 'due ' : ''}${formatWhen(item.occurredAt, item.precision)}`
         : `detected ${formatWhen(item.detectedAt)}`;
       const building = item.countsAsBuilding ? ' · counts as building' : '';
       lines.push(`• ${when} · ${code(item.type)}${building}`);
       lines.push(`  ${quoted(item.summary, 200)}`);
+    };
+    const recorded = items.filter((item) => !isScheduled(item));
+    const scheduled = items.filter(isScheduled);
+    if (recorded.length > 0) lines.push('Newest recorded first:');
+    for (const item of recorded) render(item, false);
+    if (scheduled.length > 0) {
+      lines.push(bold('Scheduled'));
+      for (const item of scheduled) render(item, true);
     }
     if (page.hasMore) lines.push('Older changes are on the project page.');
   }

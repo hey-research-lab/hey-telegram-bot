@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import { RecentUpdates, handleUpdate } from '../src/bot.js';
+import { renderChanges } from '../src/render/replies.js';
 import { LIMITS } from '../src/ratelimit.js';
 import { fixture, groupText, heyRoutes, makeDeps, privateText, update } from './helpers.js';
 
@@ -197,6 +198,31 @@ describe('/changes', () => {
     expect(text).not.toContain('$987M');
     expect(text).toContain('Market events are not shown here.');
     expect(text).toContain('https://heyresearch.xyz/project/example-builder');
+  });
+
+  it('lists a scheduled unlock apart, as due, never among recent changes (0.1.1)', () => {
+    type Page = Parameters<typeof renderChanges>[1];
+    const page = fixture<Page>('hey/changes.json');
+    const first = page.items[0] as Extract<Page['items'][number], { op: 'upsert' }>;
+    const { countsAsBuilding: _building, ...rest } = first;
+    const unlock = {
+      ...rest,
+      id: 'lock:00000000-0000-4000-8000-0000000000aa',
+      type: 'lock.unlock_due',
+      domain: 'lock',
+      occurredAt: '2026-12-01T00:00:00.000Z',
+      precision: 'SCHEDULED',
+      summary: 'Locked supply unlocks',
+    } as Page['items'][number];
+    const text = renderChanges(
+      'example-builder',
+      { ...page, items: [unlock, ...page.items] },
+      'https://heyresearch.xyz',
+      new Date('2026-10-02T00:00:00.000Z'),
+    );
+    expect(text.indexOf('<b>Scheduled</b>')).toBeGreaterThan(text.indexOf('build.release'));
+    expect(text).toContain('• due 2026-12-01');
+    expect(text).toContain('Newest recorded first:');
   });
 
   it('says what an empty ledger means and links the project page', async () => {

@@ -54,7 +54,7 @@ describe('HEY gateway: which routes it reads', () => {
     const { fetchImpl, calls } = heyRoutes();
     await createHeyGateway({ baseUrl: HEY_BASE, fetchImpl }).project('example-builder');
     const headers = new Headers(calls[0]!.init?.headers);
-    expect(headers.get('user-agent')).toMatch(/^hey-telegram-bot\/0\.1\.0 /);
+    expect(headers.get('user-agent')).toMatch(/^hey-telegram-bot\/0\.1\.1 /);
     expect(headers.get('authorization')).toBeNull();
     expect(headers.get('x-api-key')).toBeNull();
   });
