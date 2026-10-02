@@ -1,0 +1,22 @@
+# Copy to docker-compose.yml, create .env from .env.example, then:
+#   docker compose up -d --build
+# The bot listens on 127.0.0.1:8080; put an HTTPS reverse proxy in front of it
+# (Telegram only delivers webhooks over HTTPS). See docs/SETUP.md.
+services:
+  hey-telegram-bot:
+    build: .
+    image: hey-telegram-bot:0.1.0
+    command: ['webhook']
+    # For local development without a public URL, use long polling instead:
+    # command: ["polling"]
+    env_file: .env
+    ports:
+      - '127.0.0.1:8080:8080'
+    read_only: true
+    cap_drop: [ALL]
+    security_opt:
+      - no-new-privileges:true
+    init: true
+    mem_limit: 256m
+    pids_limit: 64
+    restart: unless-stopped
