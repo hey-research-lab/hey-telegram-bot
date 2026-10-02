@@ -1,0 +1,13 @@
+{
+  "update_id": 500000009,
+  "channel_post": {
+    "message_id": 1,
+    "chat": {
+      "id": -1002000000001,
+      "type": "channel",
+      "title": "Example Channel"
+    },
+    "date": 1790000000,
+    "text": "/today"
+  }
+}

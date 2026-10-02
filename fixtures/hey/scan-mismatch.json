@@ -1,0 +1,36 @@
+{
+  "found": true,
+  "chainId": 4663,
+  "contractAddress": "0x0000000000000000000000000000000000000002",
+  "status": "shipping",
+  "status_label": "Shipping",
+  "status_help": "Shipped something meaningful in the last 7 days.",
+  "verified_builder": true,
+  "token_verification": "MISMATCH",
+  "activity_applies_to_token": false,
+  "research_level": "VERIFIED_BUILDER",
+  "activity_measured": true,
+  "coverage": "measured",
+  "as_of": "2026-10-02T06:00:00.000Z",
+  "activity": {
+    "commits_30d": 42,
+    "commits_30d_partial": true,
+    "releases_30d": 2,
+    "ships_30d": 5,
+    "meaningful_ships_30d": 4,
+    "last_ship": "2026-09-30T10:00:00.000Z",
+    "last_ship_title": "Example SDK v0.4",
+    "last_ship_url": "https://github.com/example-org/example-sdk/releases/tag/v0.4.0"
+  },
+  "project": {
+    "slug": "example-builder",
+    "name": "Example Builder",
+    "symbol": "EXB"
+  },
+  "project_url": "https://heyresearch.xyz/project/example-builder",
+  "logo_url": "https://heyresearch.xyz/logo/example-builder.png",
+  "badge_url": "https://heyresearch.xyz/badge/example-builder.svg",
+  "price_usd": 0.0123,
+  "market_cap_usd": 987654321,
+  "disclaimer": "Public, source-backed activity HEY recorded. Still Building means verified activity through a tracked market drawdown — it is not a prediction, not a ranking by price, and not investment advice. Few projects meet Still Building or Under the Radar at any time; both are strict by design, and list responses carry the counts."
+}

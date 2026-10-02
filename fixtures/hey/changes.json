@@ -1,0 +1,93 @@
+{
+  "query": {
+    "project": "example-builder",
+    "domain": "build,contract,token,research,lock",
+    "limit": 5
+  },
+  "items": [
+    {
+      "id": "ship:00000000-0000-4000-8000-000000000001",
+      "revision": 1,
+      "op": "upsert",
+      "type": "build.release",
+      "domain": "build",
+      "origin": "live",
+      "project": {
+        "slug": "example-builder",
+        "name": "Example Builder",
+        "url": "https://heyresearch.xyz/project/example-builder"
+      },
+      "occurredAt": "2026-09-30T10:00:00.000Z",
+      "precision": "EXACT",
+      "detectedAt": "2026-09-30T10:05:00.000Z",
+      "recordedAt": "2026-09-30T10:10:00.000Z",
+      "summary": "Example SDK v0.4",
+      "evidence": [
+        {
+          "id": "ship:00000000-0000-4000-8000-000000000001",
+          "url": "https://github.com/example-org/example-sdk/releases/tag/v0.4.0",
+          "label": "GitHub"
+        }
+      ],
+      "source": "github",
+      "countsAsBuilding": true
+    },
+    {
+      "id": "ship:00000000-0000-4000-8000-000000000009",
+      "revision": 2,
+      "op": "retract",
+      "recordedAt": "2026-09-29T00:00:00.000Z"
+    },
+    {
+      "id": "state:00000000-0000-4000-8000-0000000000aa:activity:1",
+      "revision": 1,
+      "op": "upsert",
+      "type": "build.status_changed",
+      "domain": "build",
+      "origin": "live",
+      "project": {
+        "slug": "example-builder",
+        "name": "Example Builder",
+        "url": "https://heyresearch.xyz/project/example-builder"
+      },
+      "occurredAt": null,
+      "precision": "OBSERVED",
+      "detectedAt": "2026-09-29T08:00:00.000Z",
+      "recordedAt": "2026-09-29T08:00:00.000Z",
+      "summary": "Activity status: Active → Shipping",
+      "before": "ACTIVE",
+      "after": "SHIPPING",
+      "evidence": [],
+      "source": "hey"
+    },
+    {
+      "id": "signal:00000000-0000-4000-8000-0000000000bb",
+      "revision": 1,
+      "op": "upsert",
+      "type": "market.valuation_moved",
+      "domain": "market",
+      "origin": "live",
+      "project": {
+        "slug": "example-builder",
+        "name": "Example Builder",
+        "url": "https://heyresearch.xyz/project/example-builder"
+      },
+      "occurredAt": "2026-09-28T00:00:00.000Z",
+      "precision": "DATE",
+      "detectedAt": "2026-09-28T01:00:00.000Z",
+      "recordedAt": "2026-09-28T01:00:00.000Z",
+      "summary": "Valuation up 250% to $987M",
+      "evidence": [],
+      "source": "example-provider"
+    }
+  ],
+  "nextCursor": "c1.100",
+  "hasMore": true,
+  "ledger": {
+    "collectionStart": "2026-09-26T11:35:57.227Z",
+    "transitionsFrom": "2026-09-26T11:32:48.791Z",
+    "newestRecordedAt": "2026-10-02T11:35:02.091Z",
+    "projectorRanAt": "2026-10-02T11:35:02.091Z"
+  },
+  "disclaimer": "Public, source-backed activity HEY recorded. Still Building means verified activity through a tracked market drawdown — it is not a prediction, not a ranking by price, and not investment advice. Few projects meet Still Building or Under the Radar at any time; both are strict by design, and list responses carry the counts."
+}

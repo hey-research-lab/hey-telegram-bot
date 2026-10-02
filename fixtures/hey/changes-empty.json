@@ -1,0 +1,15 @@
+{
+  "query": {
+    "project": "example-builder"
+  },
+  "items": [],
+  "nextCursor": null,
+  "hasMore": false,
+  "ledger": {
+    "collectionStart": "2026-09-26T11:35:57.227Z",
+    "transitionsFrom": "2026-09-26T11:32:48.791Z",
+    "newestRecordedAt": "2026-10-02T11:35:02.091Z",
+    "projectorRanAt": "2026-10-02T11:35:02.091Z"
+  },
+  "disclaimer": "Public, source-backed activity HEY recorded. Still Building means verified activity through a tracked market drawdown — it is not a prediction, not a ranking by price, and not investment advice. Few projects meet Still Building or Under the Radar at any time; both are strict by design, and list responses carry the counts."
+}

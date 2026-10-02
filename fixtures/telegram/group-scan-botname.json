@@ -1,0 +1,29 @@
+{
+  "update_id": 500000003,
+  "message": {
+    "message_id": 10,
+    "from": {
+      "id": 1001,
+      "is_bot": false,
+      "first_name": "Example",
+      "username": "example_person",
+      "language_code": "en"
+    },
+    "chat": {
+      "id": -1001000000001,
+      "type": "supergroup",
+      "title": "Example Group"
+    },
+    "date": 1790000000,
+    "text": "/scan@HeyExampleBot 0X0000000000000000000000000000000000000001",
+    "entities": [
+      {
+        "offset": 0,
+        "length": 19,
+        "type": "bot_command"
+      }
+    ],
+    "message_thread_id": 7,
+    "is_topic_message": true
+  }
+}

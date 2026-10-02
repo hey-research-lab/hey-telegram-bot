@@ -1,0 +1,72 @@
+{
+  "slug": "example-builder",
+  "name": "Example Builder",
+  "symbol": "EXB",
+  "shortDescription": "An example project used in this repository's tests.",
+  "projectKind": "PRODUCT",
+  "activityStatus": "SHIPPING",
+  "researchLevel": "VERIFIED_BUILDER",
+  "catalogStatus": "VERIFIED_BUILDER",
+  "stillBuilding": false,
+  "stillBuildingState": "NOT_MEASURED",
+  "stillBuildingWithheld": "market_too_thin",
+  "lastShippedAt": "2026-09-30T10:00:00.000Z",
+  "primaryNarrative": {
+    "slug": "infrastructure",
+    "name": "Infrastructure"
+  },
+  "token": {
+    "chainId": 4663,
+    "contractAddress": "0x0000000000000000000000000000000000000001"
+  },
+  "tokenVerification": {
+    "status": "VERIFIED"
+  },
+  "tokenMarket": {
+    "status": "LOW_LIQUIDITY"
+  },
+  "hasBuilderSource": true,
+  "marketCap": {
+    "usd": 987654321,
+    "source": "example-provider",
+    "observedAt": "2026-10-01T00:00:00.000Z",
+    "kind": "marketCap"
+  },
+  "liquidity": {
+    "usd": 4242424,
+    "source": "example-provider",
+    "kind": "market"
+  },
+  "volume24h": {
+    "usd": 7777777
+  },
+  "priceChange24hPct": -31.5,
+  "trades24h": {
+    "buys": 123,
+    "sells": 456
+  },
+  "websiteUrl": "https://example.com",
+  "url": "https://heyresearch.xyz/project/example-builder",
+  "ships": [
+    {
+      "id": "00000000-0000-4000-8000-000000000001",
+      "title": "Example SDK v0.4",
+      "summary": "Release notes.",
+      "eventType": "GITHUB_RELEASE",
+      "publishedAt": "2026-09-30T10:00:00.000Z",
+      "detectedAt": "2026-09-30T10:05:00.000Z",
+      "precision": "EXACT",
+      "evidenceId": "ship:00000000-0000-4000-8000-000000000001",
+      "verification": "PUBLICLY_VERIFIED",
+      "sourceUrl": "https://github.com/example-org/example-sdk/releases/tag/v0.4.0",
+      "url": "https://heyresearch.xyz/project/example-builder"
+    }
+  ],
+  "firstSeenAt": "2026-06-01T00:00:00.000Z",
+  "firstRecordedByHeyAt": "2026-06-01T00:00:00.000Z",
+  "isClaimed": false,
+  "submitted": false,
+  "narratives": [],
+  "sources": [],
+  "disclaimer": "Public, source-backed activity HEY recorded. Still Building means verified activity through a tracked market drawdown — it is not a prediction, not a ranking by price, and not investment advice. Few projects meet Still Building or Under the Radar at any time; both are strict by design, and list responses carry the counts."
+}

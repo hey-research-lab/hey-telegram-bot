@@ -1,0 +1,6 @@
+{
+  "error": "not_found",
+  "message": "No published project has the slug \"no-such-project\".",
+  "retryable": false,
+  "requestId": "00000000-0000-4000-8000-00000000a404"
+}

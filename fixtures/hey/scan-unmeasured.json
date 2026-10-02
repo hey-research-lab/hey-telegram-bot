@@ -1,0 +1,34 @@
+{
+  "found": true,
+  "chainId": 4663,
+  "contractAddress": "0x0000000000000000000000000000000000000003",
+  "status": "unknown",
+  "status_label": "Activity unknown",
+  "status_help": "Not enough public sources to judge activity yet.",
+  "verified_builder": true,
+  "token_verification": "VERIFIED",
+  "activity_applies_to_token": true,
+  "research_level": "INDEXED",
+  "activity_measured": false,
+  "coverage": "no_source",
+  "as_of": "2026-10-02T06:00:00.000Z",
+  "activity": {
+    "releases_30d": 0,
+    "ships_30d": 0
+  },
+  "project": {
+    "slug": "example-builder",
+    "name": "Example Builder",
+    "symbol": "EXB"
+  },
+  "project_url": "https://heyresearch.xyz/project/example-builder",
+  "logo_url": "https://heyresearch.xyz/logo/example-builder.png",
+  "badge_url": "https://heyresearch.xyz/badge/example-builder.svg",
+  "cta": {
+    "label": "See the builder record on HEY",
+    "url": "https://heyresearch.xyz/project/example-builder?utm_source=partner"
+  },
+  "price_usd": 0.0123,
+  "market_cap_usd": 987654321,
+  "disclaimer": "Public, source-backed activity HEY recorded. Still Building means verified activity through a tracked market drawdown — it is not a prediction, not a ranking by price, and not investment advice. Few projects meet Still Building or Under the Radar at any time; both are strict by design, and list responses carry the counts."
+}

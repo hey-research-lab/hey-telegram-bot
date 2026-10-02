@@ -1,0 +1,156 @@
+{
+  "schema": "hey.agent-intelligence-response",
+  "schemaVersion": "1",
+  "capability": "what_changed",
+  "status": "ok",
+  "query": {
+    "chainId": 4663,
+    "days": 1,
+    "limit": 5,
+    "building": "only"
+  },
+  "chain": {
+    "chainId": 4663,
+    "name": "Robinhood Chain"
+  },
+  "subject": {
+    "kind": "chain"
+  },
+  "answer": {
+    "text": "75 changes that count as building recorded for Robinhood Chain projects in the last day (64 weeks of code activity, 11 releases); showing the newest 2.",
+    "contentOrigin": "derived"
+  },
+  "answerStatus": "FACT",
+  "claims": [],
+  "unknowns": [],
+  "freshness": [],
+  "evidence": [],
+  "data": {
+    "scope": "chain",
+    "window": {
+      "days": 1,
+      "from": "2026-10-01T11:36:06.637Z",
+      "to": "2026-10-02T11:36:06.637Z",
+      "basis": "occurred_else_detected"
+    },
+    "types": null,
+    "total": 75,
+    "countsAsBuilding": 75,
+    "byType": [
+      {
+        "type": "build.code_activity",
+        "count": 64
+      },
+      {
+        "type": "build.release",
+        "count": 11
+      }
+    ],
+    "shown": 2,
+    "items": [
+      {
+        "id": "ship:00000000-0000-4000-8000-000000000101",
+        "revision": 1,
+        "type": "build.release",
+        "domain": "build",
+        "occurredAt": "2026-10-02T10:01:00.000Z",
+        "precision": "EXACT",
+        "detectedAt": "2026-10-02T10:30:00.000Z",
+        "recordedAt": "2026-10-02T11:00:00.000Z",
+        "summary": {
+          "text": "Example SDK v0.4",
+          "contentOrigin": "derived"
+        },
+        "status": "FACT",
+        "countsAsBuilding": true,
+        "verification": "SOURCE_LINKED",
+        "project": {
+          "slug": "example-builder",
+          "url": "https://heyresearch.xyz/project/example-builder"
+        },
+        "evidence": [
+          {
+            "id": "ship:00000000-0000-4000-8000-000000000101",
+            "receiptUrl": "https://heyresearch.xyz/api/evidence/ship%3A00000000-0000-4000-8000-000000000101",
+            "sourceUrl": "https://github.com/example-org/example"
+          }
+        ],
+        "source": "github"
+      },
+      {
+        "id": "ship:00000000-0000-4000-8000-000000000102",
+        "revision": 1,
+        "type": "build.code_activity",
+        "domain": "build",
+        "occurredAt": "2026-10-02T10:02:00.000Z",
+        "precision": "WEEK",
+        "detectedAt": "2026-10-02T10:30:00.000Z",
+        "recordedAt": "2026-10-02T11:00:00.000Z",
+        "summary": {
+          "text": "Active development: 12 commits since 2026-09-26 across 2 contributors",
+          "contentOrigin": "derived"
+        },
+        "status": "FACT",
+        "countsAsBuilding": true,
+        "verification": "SOURCE_LINKED",
+        "project": {
+          "slug": "example-second",
+          "url": "https://heyresearch.xyz/project/example-second"
+        },
+        "evidence": [
+          {
+            "id": "ship:00000000-0000-4000-8000-000000000102",
+            "receiptUrl": "https://heyresearch.xyz/api/evidence/ship%3A00000000-0000-4000-8000-000000000102",
+            "sourceUrl": "https://github.com/example-org/example"
+          }
+        ],
+        "source": "github"
+      }
+    ],
+    "ledger": {
+      "collectionStart": "2026-09-26T11:35:57.227Z",
+      "transitionsFrom": "2026-09-26T11:32:48.791Z",
+      "newestRecordedAt": "2026-10-02T11:35:02.091Z",
+      "projectorRanAt": "2026-10-02T11:35:02.091Z"
+    },
+    "more": "https://heyresearch.xyz/api/changes"
+  },
+  "methodology": {
+    "rules": [
+      {
+        "id": "activity.status",
+        "version": "hbm-v21"
+      }
+    ],
+    "url": "https://heyresearch.xyz/methodology"
+  },
+  "links": {
+    "self": "https://heyresearch.xyz/api/agent/what_changed?days=1&building=only&limit=5",
+    "canonical": []
+  },
+  "citation": null,
+  "boundaries": {
+    "notAdvice": true,
+    "notProvided": [
+      "investment_recommendation",
+      "buy_or_sell_signal",
+      "price_prediction",
+      "price_target",
+      "position_size",
+      "leverage",
+      "stop_loss",
+      "ranking_by_expected_return",
+      "risk_score",
+      "safety_verdict",
+      "smart_money_label",
+      "wallet_pnl",
+      "wallet_profile"
+    ],
+    "marketIsContextOnly": true,
+    "disclaimer": {
+      "text": "Public, source-backed activity HEY recorded. Still Building means verified activity through a tracked market drawdown — it is not a prediction, not a ranking by price, and not investment advice. Few projects meet Still Building or Under the Radar at any time; both are strict by design, and list responses carry the counts.",
+      "contentOrigin": "hey"
+    }
+  },
+  "asOf": "2026-10-02T11:36:06.637Z"
+}

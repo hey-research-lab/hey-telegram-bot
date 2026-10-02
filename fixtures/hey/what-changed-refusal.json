@@ -1,0 +1,74 @@
+{
+  "schema": "hey.agent-intelligence-response",
+  "schemaVersion": "1",
+  "capability": "what_changed",
+  "status": "invalid_request",
+  "query": {
+    "chainId": 4663,
+    "days": 1,
+    "limit": 5,
+    "building": "only"
+  },
+  "chain": {
+    "chainId": 4663,
+    "name": "Robinhood Chain"
+  },
+  "subject": {
+    "kind": "chain"
+  },
+  "answer": {
+    "text": "HEY could not answer this question.",
+    "contentOrigin": "hey"
+  },
+  "answerStatus": "FACT",
+  "claims": [],
+  "unknowns": [],
+  "freshness": [],
+  "evidence": [],
+  "data": null,
+  "methodology": {
+    "rules": [
+      {
+        "id": "activity.status",
+        "version": "hbm-v21"
+      }
+    ],
+    "url": "https://heyresearch.xyz/methodology"
+  },
+  "links": {
+    "self": "https://heyresearch.xyz/api/agent/what_changed?days=1&building=only&limit=5",
+    "canonical": []
+  },
+  "citation": null,
+  "boundaries": {
+    "notAdvice": true,
+    "notProvided": [
+      "investment_recommendation",
+      "buy_or_sell_signal",
+      "price_prediction",
+      "price_target",
+      "position_size",
+      "leverage",
+      "stop_loss",
+      "ranking_by_expected_return",
+      "risk_score",
+      "safety_verdict",
+      "smart_money_label",
+      "wallet_pnl",
+      "wallet_profile"
+    ],
+    "marketIsContextOnly": true,
+    "disclaimer": {
+      "text": "Public, source-backed activity HEY recorded. Still Building means verified activity through a tracked market drawdown — it is not a prediction, not a ranking by price, and not investment advice. Few projects meet Still Building or Under the Radar at any time; both are strict by design, and list responses carry the counts.",
+      "contentOrigin": "hey"
+    }
+  },
+  "asOf": "2026-10-02T11:36:06.637Z",
+  "error": {
+    "code": "invalid_parameter",
+    "message": {
+      "text": "days must be between 1 and 30.",
+      "contentOrigin": "hey"
+    }
+  }
+}

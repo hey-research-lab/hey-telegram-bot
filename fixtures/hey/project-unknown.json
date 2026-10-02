@@ -1,0 +1,48 @@
+{
+  "slug": "example-unread",
+  "name": "Example Unread",
+  "shortDescription": "An example project used in this repository's tests.",
+  "projectKind": "PRODUCT",
+  "activityStatus": "UNKNOWN",
+  "researchLevel": "INDEXED",
+  "catalogStatus": "VERIFIED_BUILDER",
+  "stillBuilding": false,
+  "stillBuildingWithheld": "market_too_thin",
+  "primaryNarrative": {
+    "slug": "infrastructure",
+    "name": "Infrastructure"
+  },
+  "tokenMarket": {
+    "status": "LOW_LIQUIDITY"
+  },
+  "hasBuilderSource": false,
+  "marketCap": {
+    "usd": 987654321,
+    "source": "example-provider",
+    "observedAt": "2026-10-01T00:00:00.000Z",
+    "kind": "marketCap"
+  },
+  "liquidity": {
+    "usd": 4242424,
+    "source": "example-provider",
+    "kind": "market"
+  },
+  "volume24h": {
+    "usd": 7777777
+  },
+  "priceChange24hPct": -31.5,
+  "trades24h": {
+    "buys": 123,
+    "sells": 456
+  },
+  "websiteUrl": "https://example.com",
+  "url": "https://heyresearch.xyz/project/example-unread",
+  "ships": [],
+  "firstSeenAt": "2026-06-01T00:00:00.000Z",
+  "firstRecordedByHeyAt": "2026-06-01T00:00:00.000Z",
+  "isClaimed": false,
+  "submitted": false,
+  "narratives": [],
+  "sources": [],
+  "disclaimer": "Public, source-backed activity HEY recorded. Still Building means verified activity through a tracked market drawdown — it is not a prediction, not a ranking by price, and not investment advice. Few projects meet Still Building or Under the Radar at any time; both are strict by design, and list responses carry the counts."
+}

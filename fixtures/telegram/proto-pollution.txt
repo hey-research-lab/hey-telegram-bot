@@ -1,0 +1,1 @@
+{"update_id":500000010,"message":{"message_id":1,"date":1790000000,"chat":{"id":1001,"type":"private"},"text":"/help","__proto__":{"isAdmin":true}}}
