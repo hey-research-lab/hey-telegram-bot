@@ -1,0 +1,70 @@
+{
+  "name": "hey-telegram-bot",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Self-hostable, read-only Telegram bot for HEY Research Lab lookups on Robinhood Chain, powered only by the public API.",
+  "license": "MIT",
+  "author": "HEY Research Lab",
+  "type": "module",
+  "homepage": "https://heyresearch.xyz/developers",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hey-research-lab/hey-telegram-bot.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hey-research-lab/hey-telegram-bot/issues"
+  },
+  "keywords": [
+    "hey-research",
+    "robinhood-chain",
+    "telegram-bot",
+    "bot",
+    "docker",
+    "developer-tools"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "bin": {
+    "hey-telegram-bot": "./dist/main.js"
+  },
+  "exports": {
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "packageManager": "pnpm@9.15.1",
+  "scripts": {
+    "build": "tsup",
+    "lint": "eslint .",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "scan": "node scripts/scan.mjs .",
+    "format:check": "prettier --check .",
+    "format": "prettier --write .",
+    "start": "node dist/main.js webhook",
+    "dev:polling": "pnpm build && node --env-file=.env dist/main.js polling"
+  },
+  "dependencies": {
+    "@hey-research-lab/sdk": "^0.1.1",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.17.0",
+    "@types/node": "^22.10.0",
+    "eslint": "^9.17.0",
+    "eslint-config-prettier": "^9.1.0",
+    "prettier": "^3.4.2",
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.2",
+    "typescript-eslint": "^8.18.0",
+    "vitest": "^2.1.8"
+  }
+}
