@@ -41,7 +41,7 @@ Edit `.env`:
 ```
 TELEGRAM_BOT_TOKEN=<the token from BotFather>
 TELEGRAM_WEBHOOK_SECRET=<the output of openssl rand -hex 32>
-HEY_API_BASE=
+HEY_BASE_URL=
 PORT=
 LOG_LEVEL=
 ```

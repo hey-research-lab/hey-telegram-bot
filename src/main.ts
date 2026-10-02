@@ -21,7 +21,7 @@ Usage: hey-telegram-bot <command>
   delete-webhook          Remove the webhook (needed before polling)
   healthcheck             Exit 0 when the local server answers ${HEALTH_PATH}
 
-Environment: TELEGRAM_BOT_TOKEN, TELEGRAM_WEBHOOK_SECRET, HEY_API_BASE, PORT, LOG_LEVEL.
+Environment: TELEGRAM_BOT_TOKEN, TELEGRAM_WEBHOOK_SECRET, HEY_BASE_URL, PORT, LOG_LEVEL.
 See .env.example and docs/SETUP.md.
 `;
 

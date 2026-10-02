@@ -8,7 +8,7 @@ import { LOG_LEVELS, type LogLevel } from './log.js';
  * never echoes its value.
  */
 
-export const DEFAULT_HEY_API_BASE = 'https://heyresearch.xyz';
+export const DEFAULT_HEY_BASE_URL = 'https://heyresearch.xyz';
 export const DEFAULT_PORT = 8080;
 
 /** Telegram's bot token shape: a numeric bot id, a colon, then the secret part. */
@@ -45,19 +45,19 @@ const read = (env: Env, name: string): string | undefined => {
 
 /** The HEY API origin: https only, no credentials, no path, query or fragment. */
 export function parseHeyApiBase(raw: string | undefined): string {
-  if (raw === undefined) return DEFAULT_HEY_API_BASE;
+  if (raw === undefined) return DEFAULT_HEY_BASE_URL;
   let url: URL;
   try {
     url = new URL(raw);
   } catch {
-    throw new ConfigError('HEY_API_BASE is not a URL.');
+    throw new ConfigError('HEY_BASE_URL is not a URL.');
   }
-  if (url.protocol !== 'https:') throw new ConfigError('HEY_API_BASE must use https.');
+  if (url.protocol !== 'https:') throw new ConfigError('HEY_BASE_URL must use https.');
   if (url.username || url.password) {
-    throw new ConfigError('HEY_API_BASE must not carry credentials.');
+    throw new ConfigError('HEY_BASE_URL must not carry credentials.');
   }
   if ((url.pathname !== '/' && url.pathname !== '') || url.search || url.hash) {
-    throw new ConfigError('HEY_API_BASE must be an origin only, such as https://heyresearch.xyz.');
+    throw new ConfigError('HEY_BASE_URL must be an origin only, such as https://heyresearch.xyz.');
   }
   return url.origin;
 }
@@ -98,7 +98,7 @@ export function loadConfig(env: Env, mode: Mode): Config {
   return {
     botToken,
     webhookSecret,
-    heyApiBase: parseHeyApiBase(read(env, 'HEY_API_BASE')),
+    heyApiBase: parseHeyApiBase(read(env, 'HEY_BASE_URL')),
     port: parsePort(read(env, 'PORT')),
     logLevel: parseLogLevel(read(env, 'LOG_LEVEL')),
   };

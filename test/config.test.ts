@@ -20,7 +20,7 @@ describe('loadConfig', () => {
 
   it('treats empty values as unset', () => {
     expect(
-      loadConfig({ ...base, HEY_API_BASE: '', PORT: ' ', LOG_LEVEL: '' }, 'webhook'),
+      loadConfig({ ...base, HEY_BASE_URL: '', PORT: ' ', LOG_LEVEL: '' }, 'webhook'),
     ).toMatchObject({
       heyApiBase: 'https://heyresearch.xyz',
       port: 8080,
@@ -57,9 +57,9 @@ describe('loadConfig', () => {
     ).toThrow(ConfigError);
   });
 
-  it('accepts only an https origin for HEY_API_BASE', () => {
+  it('accepts only an https origin for HEY_BASE_URL', () => {
     expect(
-      loadConfig({ ...base, HEY_API_BASE: 'https://heyresearch.xyz/' }, 'webhook').heyApiBase,
+      loadConfig({ ...base, HEY_BASE_URL: 'https://heyresearch.xyz/' }, 'webhook').heyApiBase,
     ).toBe('https://heyresearch.xyz');
     for (const bad of [
       'http://heyresearch.xyz',
@@ -69,7 +69,7 @@ describe('loadConfig', () => {
       'https://heyresearch.xyz/?x=1',
       'not a url',
     ]) {
-      expect(() => loadConfig({ ...base, HEY_API_BASE: bad }, 'webhook')).toThrow(ConfigError);
+      expect(() => loadConfig({ ...base, HEY_BASE_URL: bad }, 'webhook')).toThrow(ConfigError);
     }
   });
 
@@ -92,7 +92,7 @@ describe('.env.example', () => {
     expect(assignments.map((l) => l.split('=')[0])).toEqual([
       'TELEGRAM_BOT_TOKEN',
       'TELEGRAM_WEBHOOK_SECRET',
-      'HEY_API_BASE',
+      'HEY_BASE_URL',
       'PORT',
       'LOG_LEVEL',
     ]);

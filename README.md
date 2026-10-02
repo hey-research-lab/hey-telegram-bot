@@ -110,7 +110,7 @@ HTTP endpoints in webhook mode: `POST /telegram/webhook` (Telegram's updates) an
 | ------------------------- | ------------ | ------------------------- | ---------------------------------------------------------------------------------------------------- |
 | `TELEGRAM_BOT_TOKEN`      | yes          | —                         | The token from @BotFather.                                                                           |
 | `TELEGRAM_WEBHOOK_SECRET` | webhook mode | —                         | 32–256 characters of `A-Z a-z 0-9 _ -`; Telegram sends it back in `X-Telegram-Bot-Api-Secret-Token`. |
-| `HEY_API_BASE`            | no           | `https://heyresearch.xyz` | HEY's API origin; `https` only, no path.                                                             |
+| `HEY_BASE_URL`            | no           | `https://heyresearch.xyz` | Tests and local mocks only; leave empty. `https` origin, no path.                                    |
 | `PORT`                    | no           | `8080`                    | The webhook server's port.                                                                           |
 | `LOG_LEVEL`               | no           | `info`                    | `debug`, `info`, `warn` or `error`.                                                                  |
 
