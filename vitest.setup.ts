@@ -11,4 +11,7 @@ const blocked = async (input: unknown): Promise<never> => {
   );
 };
 
-globalThis.fetch = blocked as unknown as typeof fetch;
+// The one exception: `test/live.test.ts`, run only with HEY_LIVE=1 (`pnpm test:live`), never in CI.
+if (process.env.HEY_LIVE !== '1') {
+  globalThis.fetch = blocked as unknown as typeof fetch;
+}

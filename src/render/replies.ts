@@ -28,15 +28,23 @@ export const REPO_URL = 'https://github.com/hey-research-lab/hey-telegram-bot';
 export const NON_AFFILIATION =
   'HEY Research Lab is an independent research project and is not affiliated with, endorsed by or partnered with Robinhood Markets, Inc. or Robinhood Chain.';
 
-/** `2026-10-02`, with how much of the date the source gave. */
+const DAY_MS = 86_400_000;
+
+/**
+ * `2026-10-02`, with how much of the date the source gave. A WEEK-precise date
+ * reads "week of" the UTC Monday that starts its week, as HEY names a code week.
+ */
 export function formatWhen(iso: string | null | undefined, precision?: string): string {
   if (!iso) return 'date unknown';
   const time = Date.parse(iso);
   if (Number.isNaN(time)) return 'date unknown';
   const day = new Date(time).toISOString().slice(0, 10);
   switch (precision) {
-    case 'WEEK':
-      return `week of ${day}`;
+    case 'WEEK': {
+      const sinceMonday = (new Date(time).getUTCDay() + 6) % 7;
+      const monday = new Date(Date.parse(day) - sinceMonday * DAY_MS).toISOString().slice(0, 10);
+      return `week of ${monday}`;
+    }
     case 'OBSERVED':
       return `observed ${day}`;
     default:
@@ -141,6 +149,8 @@ export function renderScan(card: ScanCard, address: string): string {
       `HEY’s published index has no project for ${code(address)} on ${escapeHtml(CHAIN_NAME)}.`,
       'That is a reading of HEY’s index, not a finding about the contract.',
     ];
+    const held = scanHeldLine(card);
+    if (held) lines.push(held);
     if (card.scan_url)
       lines.push(`Look it up on HEY: ${link(card.scan_url, 'heyresearch.xyz/scan')}`);
     return joinWithinBudget(lines, footer(card.disclaimer));
@@ -176,6 +186,21 @@ export function renderScan(card: ScanCard, address: string): string {
   const page = card.cta?.url ?? card.project_url;
   lines.push('', `Open on HEY: ${link(page, pageLabel(page))}`);
   return joinWithinBudget(lines, footer(card.disclaimer));
+}
+
+/** What HEY holds for a token it has no published project for (HEY 2026-10-09, additive). */
+function scanHeldLine(card: Extract<ScanCard, { found: false }>): string | undefined {
+  const via = card.launched_via ? ` (launched via ${external(card.launched_via, 60)})` : '';
+  switch (card.research_state) {
+    case 'not_researched':
+      return `HEY holds this token as a launch record${via} and has not researched it yet.`;
+    case 'not_published':
+      return `HEY holds this token${via} but has not published a project for it.`;
+    case 'not_indexed':
+      return 'HEY has not indexed this token.';
+    default:
+      return card.indexed === true ? `HEY holds this token${via}.` : undefined;
+  }
 }
 
 function scanActivityLine(card: Extract<ScanCard, { found: true }>): string {

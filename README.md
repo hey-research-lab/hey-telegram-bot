@@ -81,7 +81,11 @@ plain text with a hint.
   `UNVERIFIED`, `MISMATCH`, `PUBLICLY_VERIFIED`, `SELF_REPORTED`… A status this version does not
   know is printed as HEY sent it. `DORMANT` is never "dead".
 - Unknown stays unknown: an absent count prints as "not measured", never `0`; an address HEY has
-  not published is "no project in HEY's published index", a reading of one index, not a finding.
+  not published is "no project in HEY's published index", a reading of one index, not a finding,
+  and, when HEY says so, whether it holds the token (a launch record not researched yet, a token
+  it has not published, or one it has not indexed) — never a verdict on the token.
+- Dates at the precision HEY gives them: a code week reads "week of" its UTC Monday, as HEY
+  names it.
 - A link to the project's page on heyresearch.xyz with every project fact.
 - HEY's own one-line disclaimer.
 - No prices, market caps, liquidity, volume or trade counts — the bot does not read them — and
@@ -175,7 +179,8 @@ See [SECURITY.md](SECURITY.md). In short:
 
 See [CONTRIBUTING.md](CONTRIBUTING.md). Tests run offline over saved fixtures (`fixtures/`); the
 test setup makes any real `fetch` fail. Before a pull request: `pnpm lint`, `pnpm typecheck`,
-`pnpm test`, `pnpm build` and `pnpm scan`. Never commit a `.env` with values.
+`pnpm test`, `pnpm build` and `pnpm scan`. Never commit a `.env` with values. `pnpm test:live`
+(maintainers, never in CI) checks the bot's schemas against what heyresearch.xyz answers today.
 
 ## Licence
 

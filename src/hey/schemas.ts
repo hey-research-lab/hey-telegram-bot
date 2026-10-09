@@ -53,6 +53,10 @@ const scanNotFound = z.object({
   reason: z.string().max(40).optional(),
   message: shortText.optional(),
   scan_url: httpsUrl.optional(),
+  /** Additive (HEY, 2026-10-09), beside `scan_url`: what HEY holds for the token. Never a verdict. */
+  indexed: z.boolean().optional(),
+  research_state: z.string().max(40).optional(),
+  launched_via: z.string().max(120).optional(),
   disclaimer: shortText.optional(),
 });
 

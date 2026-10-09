@@ -104,6 +104,8 @@ export function heyRoutes(overrides: Record<string, Route> = {}) {
         return { body: fixture('hey/scan-unmeasured.json') };
       if (token === '0x0000000000000000000000000000000000000000')
         return { body: fixture('hey/scan-zero-address.json') };
+      if (token === '0x00000000000000000000000000000000000000fe')
+        return { body: fixture('hey/scan-not-researched.json') };
       return { body: fixture('hey/scan-not-found.json') };
     }
     if (key === '/api/changes') return { body: fixture('hey/changes.json') };

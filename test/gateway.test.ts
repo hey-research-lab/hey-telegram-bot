@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import { BotError, MAX_RESPONSE_BYTES, createHeyGateway } from '../src/hey/gateway.js';
+import { VERSION } from '../src/version.js';
 import { HEY_BASE, fakeFetch, fixture, heyRoutes } from './helpers.js';
 
 describe('HEY gateway: which routes it reads', () => {
@@ -54,7 +55,7 @@ describe('HEY gateway: which routes it reads', () => {
     const { fetchImpl, calls } = heyRoutes();
     await createHeyGateway({ baseUrl: HEY_BASE, fetchImpl }).project('example-builder');
     const headers = new Headers(calls[0]!.init?.headers);
-    expect(headers.get('user-agent')).toMatch(/^hey-telegram-bot\/0\.1\.1 /);
+    expect(headers.get('user-agent')?.startsWith(`hey-telegram-bot/${VERSION} `)).toBe(true);
     expect(headers.get('authorization')).toBeNull();
     expect(headers.get('x-api-key')).toBeNull();
   });

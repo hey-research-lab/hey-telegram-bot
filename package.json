@@ -1,6 +1,6 @@
 {
   "name": "hey-telegram-bot",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": true,
   "description": "Self-hostable, read-only Telegram bot for HEY Research Lab lookups on Robinhood Chain, powered only by the public API.",
   "license": "MIT",
@@ -46,6 +46,7 @@
     "lint": "eslint .",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "vitest run",
+    "test:live": "HEY_LIVE=1 vitest run test/live.test.ts",
     "scan": "node scripts/scan.mjs .",
     "format:check": "prettier --check .",
     "format": "prettier --write .",

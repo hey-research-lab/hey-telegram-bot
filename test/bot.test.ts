@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import { RecentUpdates, handleUpdate } from '../src/bot.js';
-import { renderChanges } from '../src/render/replies.js';
+import { formatWhen, renderChanges } from '../src/render/replies.js';
 import { LIMITS } from '../src/ratelimit.js';
 import { fixture, groupText, heyRoutes, makeDeps, privateText, update } from './helpers.js';
 
@@ -159,7 +159,16 @@ describe('/scan', () => {
     expect(out!.text).toContain('HEY’s published index has no project for');
     expect(out!.text).toContain('not a finding about the contract');
     expect(out!.text).toContain(
-      'href="https://heyresearch.xyz/scan?address=0x00000000000000000000000000000000000000ff"',
+      'href="https://heyresearch.xyz/scan/0x00000000000000000000000000000000000000ff"',
+    );
+    expect(out!.text).toContain('HEY has not indexed this token.');
+  });
+
+  it('says what HEY holds for a token it has not researched, never a verdict', async () => {
+    const { out } = await send('/scan 0x00000000000000000000000000000000000000fe');
+    expect(out!.text).toContain('HEY’s published index has no project for');
+    expect(out!.text).toContain(
+      'HEY holds this token as a launch record (launched via Pons) and has not researched it yet.',
     );
   });
 
@@ -241,6 +250,20 @@ describe('/changes', () => {
   });
 });
 
+describe('formatWhen', () => {
+  it('names the UTC Monday of a WEEK-precise date', () => {
+    expect(formatWhen('2026-10-09T03:36:56.000Z', 'WEEK')).toBe('week of 2026-10-05');
+    expect(formatWhen('2026-10-05T00:00:00.000Z', 'WEEK')).toBe('week of 2026-10-05');
+    expect(formatWhen('2026-10-11T23:59:59.000Z', 'WEEK')).toBe('week of 2026-10-05');
+  });
+
+  it('keeps the day for other precisions and says when the date is unknown', () => {
+    expect(formatWhen('2026-10-09T03:36:56.000Z', 'EXACT')).toBe('2026-10-09');
+    expect(formatWhen('2026-10-09T03:36:56.000Z', 'OBSERVED')).toBe('observed 2026-10-09');
+    expect(formatWhen(null)).toBe('date unknown');
+  });
+});
+
 describe('/today', () => {
   it('is labelled “What changed in the last day”, never “HEY Today”', async () => {
     const { out } = await send('/today');
@@ -253,6 +276,9 @@ describe('/today', () => {
       '<a href="https://heyresearch.xyz/project/example-second">example-second</a>',
     );
     expect(text).toContain('Showing 2 of 75 changes that count as building');
+    // A code week reads by its Monday, as HEY names it: never the day inside the week.
+    expect(text).toContain('week of 2026-09-28');
+    expect(text).toContain('«Code changes, week of 2026-09-28 – 2026-10-04»');
   });
 
   it('prints a refusal with HEY’s code', async () => {
