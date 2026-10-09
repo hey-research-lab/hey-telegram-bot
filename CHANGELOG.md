@@ -6,6 +6,7 @@ All notable changes to this project are documented here. The format follows
 
 ## Unreleased
 
+- A project slug is at most 80 characters, HEY's own request rule (OpenAPI, the agent contract's requests); a longer one is refused locally instead of reaching HEY for a 404.
 - Depends on `@hey-research-lab/sdk` `^0.2.0` (published 2026-10-09), which types the API's additive fields since 0.1.2; a caret on 0.x does not cross a minor, so `^0.1.1` kept the older SDK.
 
 ## 0.1.2 — 2026-10-09

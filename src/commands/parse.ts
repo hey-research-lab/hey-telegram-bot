@@ -70,7 +70,8 @@ function normalize(candidate: string): ArgResult<string> {
   return { ok: true, value: value.toLowerCase() };
 }
 
-export const SLUG_RE = /^[a-z0-9][a-z0-9-]{0,119}$/;
+/** HEY's request rule for a project slug: at most 80 characters, as OpenAPI and the agent contract's requests take it. */
+export const SLUG_RE = /^[a-z0-9][a-z0-9-]{0,79}$/;
 const PROJECT_URL_RE = /^https:\/\/(?:www\.)?heyresearch\.xyz\/project\/([A-Za-z0-9-]{1,120})\/?$/;
 
 /** A project slug from arguments: the slug itself, or a HEY project page URL. */

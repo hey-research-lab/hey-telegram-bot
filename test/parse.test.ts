@@ -106,6 +106,9 @@ describe('parseSlugArg', () => {
       ok: false,
     });
     expect(parseSlugArg('../admin')).toMatchObject({ ok: false, code: 'invalid_slug' });
+    // HEY's request rule: 80 characters at most (OpenAPI).
+    expect(parseSlugArg(`a${'b'.repeat(79)}`)).toMatchObject({ ok: true });
+    expect(parseSlugArg(`a${'b'.repeat(80)}`)).toMatchObject({ ok: false, code: 'invalid_slug' });
     expect(parseSlugArg('a/b')).toMatchObject({ ok: false });
     expect(parseSlugArg('-leading')).toMatchObject({ ok: false });
     expect(parseSlugArg('a'.repeat(121))).toMatchObject({ ok: false });
