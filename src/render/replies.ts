@@ -64,6 +64,12 @@ const pageLabel = (url: string): string => url.replace(/^https:\/\//, '').replac
 const sourceLink = (url: string | undefined): string =>
   isSafeUrl(url) && url.toLowerCase().startsWith('https://') ? ` · ${link(url, 'source')}` : '';
 
+/**
+ * Robinhood Chain's Terms of Service, §5.6(d)(i): a community channel says it is community-run and not an official
+ * Robinhood channel. Whoever runs this bot runs a community channel, so /start, /help and /hey all say so.
+ */
+export const COMMUNITY_LINE = 'Community-run · not an official Robinhood channel.';
+
 export function renderHelp(): string {
   return [
     bold('HEY Research bot'),
@@ -77,6 +83,8 @@ export function renderHelp(): string {
     '/help — this list',
     '',
     `Example: ${code('/project hey-research-lab')}`,
+    '',
+    COMMUNITY_LINE,
   ].join('\n');
 }
 
@@ -91,6 +99,7 @@ export function renderAbout(): string {
     `${link(SITE, 'heyresearch.xyz')} · ${link(`${SITE}/docs/public-api`, 'Public API')} · ${link(REPO_URL, 'Source')}`,
     '',
     `<i>${escapeHtml(NON_AFFILIATION)}</i>`,
+    COMMUNITY_LINE,
   ].join('\n');
 }
 
