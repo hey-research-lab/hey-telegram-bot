@@ -143,11 +143,12 @@ opt-in, stored on the operator's own disk and independent of any HEY account.
 
 The bot is a client of HEY's public API (`https://heyresearch.xyz/docs/public-api`) through the
 published [`@hey-research-lab/sdk`](https://www.npmjs.com/package/@hey-research-lab/sdk). The
-`/today` route is not in SDK 0.1.1, so it is read with the SDK's raw `client.get()`. The bot
+`/today` route (`/api/agent/what_changed`) is read with the SDK's raw `client.get()`. The bot
 sends no API key, makes no write, and reads nothing HEY does not publish to everyone. HEY's own
 quality gate decides every fact the bot relays; the bot only formats it.
 
-It is not HEY's own Telegram integration and shares no code with it: there is no account linking,
+It is not HEY's own Telegram bot (that one is at https://heyresearch.xyz/telegram) and shares no
+code with it: there is no account linking,
 no alert delivery and no analytics here.
 
 Runtime dependencies: `@hey-research-lab/sdk` and `zod` (validation of every Telegram update and
