@@ -3,9 +3,10 @@ import type { BotError } from '../hey/gateway.js';
 import type { ChangesPage, Project, ScanCard, WhatChanged } from '../hey/schemas.js';
 import {
   STILL_BUILDING_WORDS,
-  TOKEN_VERIFICATION_WORDS,
   activityWords,
-  researchLevelLabel,
+  shipCheckWords,
+  tokenCheckWords,
+  verifiedBuilderLine,
 } from '../words.js';
 import { isSafeUrl } from '../text.js';
 import { bold, code, escapeHtml, external, joinWithinBudget, link, quoted } from './html.js';
@@ -122,12 +123,12 @@ export function renderProject(p: Project): string {
     const source = sourceLink(newest.sourceUrl);
     lines.push(
       `Newest ship: ${quoted(newest.title, 160)} · ${formatWhen(newest.publishedAt, newest.precision)}${
-        newest.verification ? ` · ${code(newest.verification)}` : ''
+        newest.verification ? ` · ${escapeHtml(shipCheckWords(newest.verification))}` : ''
       }${source}`,
     );
   }
-  if (p.researchLevel)
-    lines.push(`Research level: ${escapeHtml(researchLevelLabel(p.researchLevel))}`);
+  const verifiedBuilder = verifiedBuilderLine(p.researchLevel);
+  if (verifiedBuilder) lines.push(escapeHtml(verifiedBuilder));
   if (p.stillBuildingState) {
     const state = STILL_BUILDING_WORDS[p.stillBuildingState] ?? p.stillBuildingState;
     lines.push(`Still Building: ${escapeHtml(state)}`);
@@ -135,11 +136,7 @@ export function renderProject(p: Project): string {
   if (p.token) {
     const tv = p.tokenVerification?.status;
     lines.push(
-      `Token: ${code(p.token.contractAddress)}${
-        tv
-          ? ` · ${code(tv)}${TOKEN_VERIFICATION_WORDS[tv] ? ` — ${escapeHtml(TOKEN_VERIFICATION_WORDS[tv])}` : ''}`
-          : ''
-      }`,
+      `Token: ${code(p.token.contractAddress)}${tv ? ` · ${escapeHtml(tokenCheckWords(tv))}` : ''}`,
     );
   }
   lines.push('', `Open on HEY: ${link(p.url, pageLabel(p.url))}`);
@@ -170,10 +167,7 @@ export function renderScan(card: ScanCard, address: string): string {
     `Contract ${code(card.contractAddress)} on ${escapeHtml(CHAIN_NAME)}`,
   ];
   if (card.token_verification) {
-    const gloss = TOKEN_VERIFICATION_WORDS[card.token_verification];
-    lines.push(
-      `Token verification: ${code(card.token_verification)}${gloss ? ` — ${escapeHtml(gloss)}` : ''}`,
-    );
+    lines.push(`Token check: ${escapeHtml(tokenCheckWords(card.token_verification))}`);
   }
   if (card.activity_applies_to_token === false) {
     lines.push('The activity below is the project’s, not this token’s.');
@@ -182,9 +176,8 @@ export function renderScan(card: ScanCard, address: string): string {
   lines.push(
     `Activity: ${boldExternal(card.status_label)}${card.status_help ? ` — ${external(card.status_help)}` : ''}`,
   );
-  if (card.research_level) {
-    lines.push(`Research level: ${escapeHtml(researchLevelLabel(card.research_level))}`);
-  }
+  const verifiedBuilder = verifiedBuilderLine(card.research_level);
+  if (verifiedBuilder) lines.push(escapeHtml(verifiedBuilder));
   lines.push(scanActivityLine(card));
   const a = card.activity;
   if (a?.last_ship) {

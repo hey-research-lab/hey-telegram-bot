@@ -112,7 +112,7 @@ const changeUpsert = z.object({
   summary: shortText,
   source: z.string().max(120).optional(),
   countsAsBuilding: z.literal(true).optional(),
-  facts: z.record(z.union([z.string(), z.number(), z.boolean()])).optional(),
+  facts: z.record(z.string(), z.union([z.string(), z.number(), z.boolean()])).optional(),
 });
 const changeRetract = z.object({ id: z.string().max(260), op: z.literal('retract') });
 

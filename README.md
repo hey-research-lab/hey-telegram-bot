@@ -56,14 +56,14 @@ Then message your bot:
 
 ## Commands
 
-| Command           | What it answers                                                                                                                                                                                                                                                  | HEY endpoint                                                          |
-| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
-| `/project <slug>` | A project's activity status in HEY's words, last meaningful ship, newest ship with its verification state, research level, Still Building state, tracked token and its verification, and the link to its HEY page. A HEY project URL works in place of the slug. | `GET /api/projects/{slug}`                                            |
-| `/scan <address>` | Which project HEY records for a Robinhood Chain contract: status, token verification, 30-day activity counts, last ship, project link. `0X` prefixes and `eip155:4663:` ids are accepted.                                                                        | `GET /api/v1/scan?chain=4663&token=`                                  |
-| `/changes <slug>` | The newest five changes in HEY's change ledger for a project — building, contract, token, research and lock domains. Market events are left out.                                                                                                                 | `GET /api/changes?project=&domain=build,contract,token,research,lock` |
-| `/today`          | What changed in the last day: changes that count as building across Robinhood Chain projects, with true totals by type and the newest five.                                                                                                                      | `GET /api/agent/what_changed?days=1&building=only`                    |
-| `/hey`            | About HEY Research and this bot.                                                                                                                                                                                                                                 | —                                                                     |
-| `/help`, `/start` | The command list.                                                                                                                                                                                                                                                | —                                                                     |
+| Command           | What it answers                                                                                                                                                                                                                                                                              | HEY endpoint                                                          |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| `/project <slug>` | A project's activity status in HEY's words, last meaningful ship, newest ship and what stands behind it, the Verified Builder badge where HEY holds it, Still Building state, tracked token and the token check, and the link to its HEY page. A HEY project URL works in place of the slug. | `GET /api/projects/{slug}`                                            |
+| `/scan <address>` | Which project HEY records for a Robinhood Chain contract: status, the token check, 30-day activity counts, last ship, project link. `0X` prefixes and `eip155:4663:` ids are accepted.                                                                                                       | `GET /api/v1/scan?chain=4663&token=`                                  |
+| `/changes <slug>` | The newest five changes in HEY's change ledger for a project — building, contract, token, research and lock domains. Market events are left out.                                                                                                                                             | `GET /api/changes?project=&domain=build,contract,token,research,lock` |
+| `/today`          | What changed in the last day: changes that count as building across Robinhood Chain projects, with true totals by type and the newest five.                                                                                                                                                  | `GET /api/agent/what_changed?days=1&building=only`                    |
+| `/hey`            | About HEY Research and this bot.                                                                                                                                                                                                                                                             | —                                                                     |
+| `/help`, `/start` | The command list.                                                                                                                                                                                                                                                                            | —                                                                     |
 
 `/scan` reads the same lookup HEY's partner integrations use. It never calls `POST /api/scan`,
 the live chain read HEY keeps for its own site; an address HEY has not published answers with a
@@ -77,9 +77,10 @@ plain text with a hint.
 ### What a reply contains
 
 - HEY's state words exactly: `Shipping`, `Active`, `Quiet`, `Dormant`, `Resumed building`,
-  `Activity unknown` (or HEY's reason, such as `No builder source linked`), `VERIFIED`,
-  `UNVERIFIED`, `MISMATCH`, `PUBLICLY_VERIFIED`, `SELF_REPORTED`… A status this version does not
-  know is printed as HEY sent it. `DORMANT` is never "dead".
+  `Activity unknown` (or HEY's reason, such as `No builder source linked`). A status this version
+  does not know is printed as HEY sent it. The token check and a ship's backing read in the words of
+  HEY's agent contract ("Project names this contract", "Source-backed", "Self-reported" …): a reader
+  meets "verified" only in "Verified Builder", and the Indexed and Researched levels are not shown. `DORMANT` is never "dead".
 - Unknown stays unknown: an absent count prints as "not measured", never `0`; an address HEY has
   not published is "no project in HEY's published index", a reading of one index, not a finding,
   and, when HEY says so, whether it holds the token (a launch record not researched yet, a token

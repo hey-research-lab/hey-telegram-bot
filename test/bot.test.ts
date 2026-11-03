@@ -35,10 +35,13 @@ describe('/project', () => {
     );
     expect(text).toContain('Last meaningful ship: 2026-09-30');
     expect(text).toContain('«Example SDK v0.4»');
-    expect(text).toContain('<code>PUBLICLY_VERIFIED</code>');
-    expect(text).toContain('Research level: Verified Builder');
+    expect(text).toContain('· Source-backed');
+    expect(text).toContain('\nVerified Builder\n');
+    expect(text).not.toContain('Research level');
+    // HEY's own disclaimer (the <i> footer) is relayed as sent; the bot's lines say "verified" only in "Verified Builder".
+    expect(text.split('<i>')[0]!.replace(/Verified Builder/g, '')).not.toMatch(/verified/i);
     expect(text).toContain('Still Building: not measured');
-    expect(text).toContain('<code>VERIFIED</code> — the project itself names this contract');
+    expect(text).toContain('· Project names this contract');
     expect(text).toContain(
       '<a href="https://heyresearch.xyz/project/example-builder">heyresearch.xyz/project/example-builder</a>',
     );
@@ -128,7 +131,7 @@ describe('/scan', () => {
     const { out } = await send('/scan 0x0000000000000000000000000000000000000001');
     const text = out!.text;
     expect(text).toContain('<b>Example Builder</b> (EXB)');
-    expect(text).toContain('Token verification: <code>VERIFIED</code>');
+    expect(text).toContain('Token check: Project names this contract');
     expect(text).toContain('Activity: <b>Shipping</b>');
     expect(text).toContain('Last 30 days — ships: 5, releases: 2, commits: at least 42');
     expect(text).toContain('https://heyresearch.xyz/project/example-builder?utm_source=partner');
@@ -140,9 +143,7 @@ describe('/scan', () => {
 
   it('on MISMATCH says the activity is the project’s, not the token’s', async () => {
     const { out } = await send('/scan 0x0000000000000000000000000000000000000002');
-    expect(out!.text).toContain(
-      "<code>MISMATCH</code> — the project's own site names a different contract",
-    );
+    expect(out!.text).toContain('Token check: Project names another contract');
     expect(out!.text).toContain('The activity below is the project’s, not this token’s.');
     expect(out!.text).toContain('https://heyresearch.xyz/project/example-builder');
   });

@@ -6,9 +6,18 @@ All notable changes to this project are documented here. The format follows
 
 ## Unreleased
 
+- Words (founder rulings R2 and R6, 2026-10-28): a card says "verified" only in "Verified Builder". The
+  token check reads "Project names this contract", "Not named by the project" or "Project names another
+  contract"; a ship's backing reads "Source-backed", "Checked by HEY" or "Self-reported"; the research
+  level is printed only as "Verified Builder", and Indexed and Researched are no longer shown. HEY's
+  stored values and the API are unchanged.
+- Security: `zod` moves from `^3.24.1` to `^4.6.7` (GHSA-mrhx-c7xc-m3w5, memory exhaustion on large
+  arrays, fixed only in 4.6.6). Same schemas; `facts` names its key type, as zod 4 requires.
+- The Docker base image is pinned by digest (`node:22-alpine@sha256:fe4f6d74…`), so a rebuild uses the
+  same bytes; Dependabot proposes a new digest.
 - A project slug is at most 80 characters, HEY's own request rule (OpenAPI, the agent contract's requests); a longer one is refused locally instead of reaching HEY for a 404.
 - Depends on `@hey-research-lab/sdk` `^0.2.0` (published 2026-10-09), which types the API's additive fields since 0.1.2; a caret on 0.x does not cross a minor, so `^0.1.1` kept the older SDK.
-- Development: vitest 4.1.11 / tsup 8.5.1, with esbuild held at ^0.28.1 by a pnpm override; clears dev-only advisories in the test and build toolchain. No runtime change.
+- Development: vitest 4.1.12 / tsup 8.5.1, with esbuild held at ^0.28.1 by a pnpm override; clears dev-only advisories in the test and build toolchain. No runtime change.
 
 ## 0.1.2 — 2026-10-09
 

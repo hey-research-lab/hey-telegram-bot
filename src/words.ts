@@ -50,30 +50,47 @@ export function activityWords(project: {
   return { label: status, help: undefined };
 }
 
-export const RESEARCH_LEVEL_WORDS: Readonly<Record<string, { label: string; help: string }>> = {
-  INDEXED: { label: 'Indexed', help: 'Verified on Robinhood Chain. Not researched yet.' },
-  RESEARCHED: { label: 'Researched', help: 'HEY has enriched this project from public sources.' },
-  VERIFIED_BUILDER: {
-    label: 'Verified Builder',
-    help: 'HEY holds verified evidence of shipping.',
-  },
-};
-
-/** The research level's word; a level this table does not know is printed as HEY sent it. */
-export function researchLevelLabel(level: string): string {
-  return RESEARCH_LEVEL_WORDS[level]?.label ?? level;
+/**
+ * A public reader meets "verified" only in "Verified Builder" (founder ruling R2, 2026-10-28), and the
+ * Indexed and Researched levels are not shown on public surfaces (ruling R6). So the research level is
+ * one line when HEY holds Verified Builder, and nothing otherwise.
+ */
+export function verifiedBuilderLine(level: string | undefined): string | undefined {
+  return level === 'VERIFIED_BUILDER' ? 'Verified Builder' : undefined;
 }
 
 /** Still Building in words: HELD, NOT_HELD (measured, not met) or NOT_MEASURED. */
 export const STILL_BUILDING_WORDS: Readonly<Record<string, string>> = {
-  HELD: 'held — verified building through a market drawdown HEY tracked',
+  HELD: 'held — counted building through a market drawdown HEY tracked',
   NOT_HELD: 'not held (measured)',
   NOT_MEASURED: 'not measured',
 };
 
-/** Token verification: whether the project itself names the contract. */
+/**
+ * The token check in the words of `@hey-research-lab/agent-contract`'s vocabulary (ruling R2). The stored
+ * values (`VERIFIED`, `UNVERIFIED`, `MISMATCH`) are unchanged; a value this table does not know reads as
+ * not named, never as more than HEY confirmed.
+ */
 export const TOKEN_VERIFICATION_WORDS: Readonly<Record<string, string>> = {
-  VERIFIED: 'the project itself names this contract',
-  UNVERIFIED: 'HEY has not seen the project name this contract',
-  MISMATCH: "the project's own site names a different contract",
+  VERIFIED: 'Project names this contract',
+  UNVERIFIED: 'Not named by the project',
+  MISMATCH: 'Project names another contract',
 };
+
+export function tokenCheckWords(status: string): string {
+  return TOKEN_VERIFICATION_WORDS[status] ?? TOKEN_VERIFICATION_WORDS.UNVERIFIED!;
+}
+
+/** What stands behind a ship, in the agent contract's words; self-reported stays visibly distinct. */
+export const SHIP_VERIFICATION_WORDS: Readonly<Record<string, string>> = {
+  PUBLICLY_VERIFIED: 'Source-backed',
+  SOURCE_LINKED: 'Source-backed',
+  ADMIN_VERIFIED: 'Checked by HEY',
+  SELF_REPORTED: 'Self-reported',
+  DISPUTED: 'Disputed',
+  RETRACTED: 'Retracted',
+};
+
+export function shipCheckWords(status: string): string {
+  return SHIP_VERIFICATION_WORDS[status] ?? 'Not checked';
+}
