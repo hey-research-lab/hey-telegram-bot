@@ -5,7 +5,7 @@
 # The base image is pinned by digest (node:22-alpine as of 2026-11-03), so a rebuild uses the same
 # bytes; Dependabot proposes a new digest when the tag moves.
 
-FROM node:22-alpine@sha256:fe4f6d74e20370acb04ad889077d14d0f64a9c8ea6a42bc60cddf1e844699914 AS build
+FROM node:26-alpine@sha256:c6ad9e9c1d80f6eb607c26b4b0a132ff7a2344fad1c78ea3baa2a7d4c8de6d94 AS build
 WORKDIR /src
 RUN corepack enable && corepack prepare pnpm@9.15.1 --activate
 COPY package.json pnpm-lock.yaml .npmrc ./
@@ -15,7 +15,7 @@ COPY src ./src
 RUN pnpm build \
  && cat node_modules/zod/LICENSE node_modules/@hey-research-lab/sdk/LICENSE > THIRD_PARTY_LICENSES
 
-FROM node:22-alpine@sha256:fe4f6d74e20370acb04ad889077d14d0f64a9c8ea6a42bc60cddf1e844699914
+FROM node:26-alpine@sha256:c6ad9e9c1d80f6eb607c26b4b0a132ff7a2344fad1c78ea3baa2a7d4c8de6d94
 ENV NODE_ENV=production
 WORKDIR /app
 # One self-contained file: no node_modules, no package manager at run time.
