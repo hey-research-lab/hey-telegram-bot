@@ -4,9 +4,9 @@ A self-hostable, read-only Telegram bot that answers HEY Research Lab lookups ab
 Chain projects, using nothing but HEY's public API.
 
 [![CI](https://github.com/hey-research-lab/hey-telegram-bot/actions/workflows/ci.yml/badge.svg)](https://github.com/hey-research-lab/hey-telegram-bot/actions/workflows/ci.yml)
-[![Licence: MIT](https://img.shields.io/badge/licence-MIT-blue.svg)](LICENSE)
-[![Node](https://img.shields.io/badge/node-%3E%3D22-brightgreen.svg)](package.json)
-[![Robinhood Chain 4663](https://img.shields.io/badge/Robinhood%20Chain-4663-black.svg)](#why-robinhood-chain-only)
+[![Licence: MIT](assets/badges/licence-mit.svg)](LICENSE)
+[![Node](assets/badges/node-22.svg)](package.json)
+[![Robinhood Chain 4663](assets/badges/robinhood-chain-4663.svg)](#why-robinhood-chain-only)
 
 ## Why it exists
 
