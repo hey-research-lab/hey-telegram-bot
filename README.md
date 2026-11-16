@@ -177,6 +177,8 @@ See [SECURITY.md](SECURITY.md). In short:
 - **Container:** runs as the image's unprivileged `node` user, with no secret baked in; the
   example compose file adds a read-only filesystem, no capabilities and `no-new-privileges`.
 
+HEY Research Lab also reviews other projects' code and reports what it finds privately first: [security credits](https://github.com/hey-research-lab#security-credits).
+
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md). Tests run offline over saved fixtures (`fixtures/`); the
